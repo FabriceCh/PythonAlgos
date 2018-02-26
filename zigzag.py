@@ -13,23 +13,17 @@ print(np.matrix(someSquareMatrix ))
 
 
 
-
-
-def zigzag(matrix, dim):
+def zigzag(matrix):
+    dim = len(matrix)
     goDown = True
     totalIndexesSum = 0
     nElementsInDiagonal = 1
     biggestDiagonalReached = False
     wae = True
-
-    orderedX = []
-    orderedY = []
-
+    res = []
     x = 0
     y = 0
-
-    orderedX.append(x)
-    orderedY.append(y)
+    res.append(matrix[x][y])
 
     for loopInSidewaysDiagonal in range(0, dim * 2 - 2):
 
@@ -42,36 +36,30 @@ def zigzag(matrix, dim):
         totalIndexesSum += 1
         if goDown:
             y += 1
-            orderedX.append(x)
-            orderedY.append(y)
+            res.append(matrix[x][y])
             if nElementsInDiagonal != dim:
                 goDown = False
         else:
             x += 1
-            orderedX.append(x)
-            orderedY.append(y)
+            res.append(matrix[x][y])
             goDown = True
         elementsFound = 1
         while(elementsFound < nElementsInDiagonal):
             if wae:
                 y -= 1
                 x += 1
-                orderedX.append(x)
-                orderedY.append(y)
+                res.append(matrix[x][y])
             else:
                 y += 1
                 x -= 1
-                orderedX.append(x)
-                orderedY.append(y)
+                res.append(matrix[x][y])
             elementsFound += 1
         wae = not wae
 
-    res = []
-    for i in range (0, len(orderedX)):
-        res.append(matrix[orderedX[i]][orderedY[i]])
     print("answer: " + str(res))
+    return res
 
 
 
 
-zigzag(someSquareMatrix, 8)
+zigzag(someSquareMatrix)
